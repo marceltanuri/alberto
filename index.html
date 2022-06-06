@@ -142,6 +142,7 @@ limitations under the License.
             spreadsheetId: '1TEo8hAIiNJi_ZhYV70fC_xfYZDZIAzr30TNVS02Yxlg',
             range: 'Lançamentos!A2:D250',
           });
+          console.log("range1")
           console.log(range)
         } catch (err) {
           document.getElementById('content').innerText = err.message;
@@ -153,17 +154,19 @@ limitations under the License.
             spreadsheetId: '1TEo8hAIiNJi_ZhYV70fC_xfYZDZIAzr30TNVS02Yxlg',
             range: 'Receitas!A2:B15',
           });
+          console.log("range2")
           console.log(range)
         } catch (err) {
           document.getElementById('content').innerText = err.message;
           return;
         }
-
+        
         try {
           let response = await gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: '1TEo8hAIiNJi_ZhYV70fC_xfYZDZIAzr30TNVS02Yxlg',
             range: 'Despesas!A2:C30',
           });
+          console.log("range3")
           console.log(range)
         } catch (err) {
           document.getElementById('content').innerText = err.message;
