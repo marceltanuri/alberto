@@ -16,167 +16,227 @@ limitations under the License.
 <!-- [START sheets_quickstart] -->
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Sheets API Quickstart</title>
-    <meta charset="utf-8" />
-  </head>
-  <body>
-    <p>Sheets API Quickstart</p>
 
-    <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
-    <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
+<head>
+  <title>Sheets API Quickstart</title>
+  <meta charset="utf-8" />
+</head>
 
-    <pre id="content" style="white-space: pre-wrap;"></pre>
+<body>
+  <p>Sheets API Quickstart</p>
 
-    <script type="text/javascript">
-      /* exported gapiLoaded */
-      /* exported gisLoaded */
-      /* exported handleAuthClick */
-      /* exported handleSignoutClick */
+  <!--Add buttons to initiate auth sequence and sign out-->
+  <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
+  <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
 
-      // TODO(developer): Set to client ID and API key from the Developer Console
-      const CLIENT_ID = '1058634479009-tenrbcqlhuae3hqnrgnlp11tjotap5ao.apps.googleusercontent.com';
-      const API_KEY = 'AIzaSyAQtFCqLuNKPSA5_8lHYakulT_qMDn6Mfw';
+  <pre id="content" style="white-space: pre-wrap;"></pre>
 
-      // Discovery doc URL for APIs used by the quickstart
-      const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
+  <script type="text/javascript">
+    /* exported gapiLoaded */
+    /* exported gisLoaded */
+    /* exported handleAuthClick */
+    /* exported handleSignoutClick */
 
-      // Authorization scopes required by the API; multiple scopes can be
-      // included, separated by spaces.
-      const SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly';
+    // TODO(developer): Set to client ID and API key from the Developer Console
+    const CLIENT_ID = '1058634479009-tenrbcqlhuae3hqnrgnlp11tjotap5ao.apps.googleusercontent.com';
+    const API_KEY = 'AIzaSyAQtFCqLuNKPSA5_8lHYakulT_qMDn6Mfw';
 
-      let tokenClient;
-      let gapiInited = false;
-      let gisInited = false;
+    // Discovery doc URL for APIs used by the quickstart
+    const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
 
-      document.getElementById('authorize_button').style.visibility = 'hidden';
-      document.getElementById('signout_button').style.visibility = 'hidden';
+    // Authorization scopes required by the API; multiple scopes can be
+    // included, separated by spaces.
+    const SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly';
 
-      /**
-       * Callback after api.js is loaded.
-       */
-      function gapiLoaded() {
-        gapi.load('client', intializeGapiClient);
+    let tokenClient;
+    let gapiInited = false;
+    let gisInited = false;
+
+    document.getElementById('authorize_button').style.visibility = 'hidden';
+    document.getElementById('signout_button').style.visibility = 'hidden';
+
+    /**
+     * Callback after api.js is loaded.
+     */
+    function gapiLoaded() {
+      gapi.load('client', intializeGapiClient);
+    }
+
+    /**
+     * Callback after the API client is loaded. Loads the
+     * discovery doc to initialize the API.
+     */
+    async function intializeGapiClient() {
+      await gapi.client.init({
+        apiKey: API_KEY,
+        discoveryDocs: [DISCOVERY_DOC],
+      });
+      gapiInited = true;
+      maybeEnableButtons();
+    }
+
+    /**
+     * Callback after Google Identity Services are loaded.
+     */
+    function gisLoaded() {
+      tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: CLIENT_ID,
+        scope: SCOPES,
+        callback: '', // defined later
+      });
+      gisInited = true;
+      maybeEnableButtons();
+    }
+
+    /**
+     * Enables user interaction after all libraries are loaded.
+     */
+    function maybeEnableButtons() {
+      if (gapiInited && gisInited) {
+        document.getElementById('authorize_button').style.visibility = 'visible';
       }
+    }
 
-      /**
-       * Callback after the API client is loaded. Loads the
-       * discovery doc to initialize the API.
-       */
-      async function intializeGapiClient() {
-        await gapi.client.init({
-          apiKey: API_KEY,
-          discoveryDocs: [DISCOVERY_DOC],
-        });
-        gapiInited = true;
-        maybeEnableButtons();
-      }
-
-      /**
-       * Callback after Google Identity Services are loaded.
-       */
-      function gisLoaded() {
-        tokenClient = google.accounts.oauth2.initTokenClient({
-          client_id: CLIENT_ID,
-          scope: SCOPES,
-          callback: '', // defined later
-        });
-        gisInited = true;
-        maybeEnableButtons();
-      }
-
-      /**
-       * Enables user interaction after all libraries are loaded.
-       */
-      function maybeEnableButtons() {
-        if (gapiInited && gisInited) {
-          document.getElementById('authorize_button').style.visibility = 'visible';
+    /**
+     *  Sign in the user upon button click.
+     */
+    function handleAuthClick() {
+      tokenClient.callback = async (resp) => {
+        if (resp.error !== undefined) {
+          throw (resp);
         }
-      }
+        document.getElementById('signout_button').style.visibility = 'visible';
+        document.getElementById('authorize_button').innerText = 'Refresh';
+        await readSpreadsheet();
+      };
 
-      /**
-       *  Sign in the user upon button click.
-       */
-      function handleAuthClick() {
-        tokenClient.callback = async (resp) => {
-          if (resp.error !== undefined) {
-            throw (resp);
+      if (gapi.client.getToken() === null) {
+        // Prompt the user to select a Google Account and ask for consent to share their data
+        // when establishing a new session.
+        tokenClient.requestAccessToken({ prompt: 'consent' });
+      } else {
+        // Skip display of account chooser and consent dialog for an existing session.
+        tokenClient.requestAccessToken({ prompt: '' });
+      }
+    }
+
+    /**
+     *  Sign out the user upon button click.
+     */
+    function handleSignoutClick() {
+      const token = gapi.client.getToken();
+      if (token !== null) {
+        google.accounts.oauth2.revoke(token.access_token);
+        gapi.client.setToken('');
+        document.getElementById('content').innerText = '';
+        document.getElementById('authorize_button').innerText = 'Authorize';
+        document.getElementById('signout_button').style.visibility = 'hidden';
+      }
+    }
+
+    /**
+     * Print the names and majors of students in a sample spreadsheet:
+     * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+     */
+
+    let _bankTransactions = { "data": [] }
+    let _budget = {
+      "data": [],
+      "incomings": []
+    }
+
+    async function readSpreadsheet() {
+
+      let _spreadsheetId = '1TEo8hAIiNJi_ZhYV70fC_xfYZDZIAzr30TNVS02Yxlg'
+
+      try {
+        let response = await gapi.client.sheets.spreadsheets.values.get({
+          spreadsheetId: _spreadsheetId,
+          range: 'Lançamentos!A2:D250',
+        });
+        response.result.values.array.forEach(element => {
+          if (!element[0] && element.length >= 3) {
+            _bankTransactions.data.push({
+              "Data lancamento": element[2],
+              "Data valor": element[2],
+              "Descricao": `${element[0]} - ${element[3]}`,
+              "Montante": element[1],
+              "Categoria": element[0],
+              "Tipo": "Debito"
+            })
           }
-          document.getElementById('signout_button').style.visibility = 'visible';
-          document.getElementById('authorize_button').innerText = 'Refresh';
-          await readSpreadsheet();
-        };
-
-        if (gapi.client.getToken() === null) {
-          // Prompt the user to select a Google Account and ask for consent to share their data
-          // when establishing a new session.
-          tokenClient.requestAccessToken({prompt: 'consent'});
-        } else {
-          // Skip display of account chooser and consent dialog for an existing session.
-          tokenClient.requestAccessToken({prompt: ''});
-        }
+        });
+      } catch (err) {
+        console.log(err)
+        document.getElementById('content').innerText = err.message;
       }
 
-      /**
-       *  Sign out the user upon button click.
-       */
-      function handleSignoutClick() {
-        const token = gapi.client.getToken();
-        if (token !== null) {
-          google.accounts.oauth2.revoke(token.access_token);
-          gapi.client.setToken('');
-          document.getElementById('content').innerText = '';
-          document.getElementById('authorize_button').innerText = 'Authorize';
-          document.getElementById('signout_button').style.visibility = 'hidden';
-        }
+      try {
+        let response = await gapi.client.sheets.spreadsheets.values.get({
+          spreadsheetId: _spreadsheetId,
+          range: 'Configuração!A2:B50',
+        });
+        response.result.values.array.forEach(element => {
+          if (!element[0] && element.length >= 2) {
+            _budget.data.push({
+              "desc": element[0],
+              "limit": element[1],
+              "fixed_expenses": []
+            })
+          }
+        });
+      } catch (err) {
+        console.log(err)
+        document.getElementById('content').innerText = err.message;
       }
 
-      /**
-       * Print the names and majors of students in a sample spreadsheet:
-       * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-       */
-      async function readSpreadsheet() {
-        try {
-          let response = await gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: '1TEo8hAIiNJi_ZhYV70fC_xfYZDZIAzr30TNVS02Yxlg',
-            range: 'Lançamentos!A2:D250',
-          });
-          console.log("range1")
-          console.log(response.result.values)
-        } catch (err) {
-          console.log(err)
-          document.getElementById('content').innerText = err.message;
-        }
-        
-        try {
-          let response = await gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: '1TEo8hAIiNJi_ZhYV70fC_xfYZDZIAzr30TNVS02Yxlg',
-            range: 'Receitas!A2:B15',
-          });
-          console.log("range2")
-          console.log(response.result.values)
-        } catch (err) {
-          console.log(err)
-          document.getElementById('content').innerText = err.message;
-        }
-        
-        try {
-          let response = await gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: '1TEo8hAIiNJi_ZhYV70fC_xfYZDZIAzr30TNVS02Yxlg',
-            range: 'Despesas!A2:C30',
-          });
-          console.log("range3")
-          console.log(response.result.values)
-        } catch (err) {
-          console.log(err)
-          document.getElementById('content').innerText = err.message;
-        }
+      try {
+        let response = await gapi.client.sheets.spreadsheets.values.get({
+          spreadsheetId: _spreadsheetId,
+          range: 'Despesas Fixas!A2:D50',
+        });
+        response.result.values.array.forEach(element => {
+          if (!element[0] && element.length >= 3) {
 
+            let category = _budget.data.find(elm => {
+              return elm.desc == element[0]
+            })
+
+            category.fixed_expenses.push({
+              "name": element[1],
+              "value": element[2]
+            })
+          }
+        });
+      } catch (err) {
+        console.log(err)
+        document.getElementById('content').innerText = err.message;
       }
-    </script>
-    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
-    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
-  </body>
+
+      try {
+        let response = await gapi.client.sheets.spreadsheets.values.get({
+          spreadsheetId: _spreadsheetId,
+          range: 'Receitas!A2:B25',
+        });
+        response.result.values.array.forEach(element => {
+          if (!element[0] && element.length >= 2) {
+            _budget.data.push({
+              "name": element[0],
+              "value": element[1],
+              "regex": ""
+            })
+          }
+        });
+      } catch (err) {
+        console.log(err)
+        document.getElementById('content').innerText = err.message;
+      }
+
+    }
+  </script>
+  <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+  <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+</body>
+
 </html>
 <!-- [END sheets_quickstart] -->

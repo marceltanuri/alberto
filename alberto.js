@@ -1,4 +1,4 @@
-var bankTransactions = {
+var _bankTransactions = {
     "data": [
         {
             "Data lancamento": "06-06-2022",
@@ -438,7 +438,7 @@ var bankTransactions = {
     ]
 }
 
-var budget = {
+var _budget = {
     "data": [
         {
             "desc": "Mercado",
@@ -613,7 +613,7 @@ var budget = {
 }
 
 class Transactions {
-    constructor() {
+    constructor(bankTransactions, budget) {
 
 
         var all_transactions = []
@@ -643,7 +643,7 @@ class Transactions {
 
         // populates expensesGroup with transactions from json (bank & ticket)
         all_transactions.filter(transaction => transaction.Tipo === "Debito").forEach(debtTransaction => {
-            this.addExpenseToExpenseGroupUsingExpDescriptionAndGroupRegexConfig(debtTransaction.Descricao, debtTransaction["Data lancamento"], debtTransaction.Montante)
+            this.addExpenseToExpenseGroupUsingExpDescriptionAndGroupRegexConfig(debtTransaction.Categoria, debtTransaction.Descricao, debtTransaction["Data lancamento"], debtTransaction.Montante)
         })
 
         all_transactions.filter(transaction => transaction.Tipo === "Credito").forEach(creditTransaction => {
@@ -682,12 +682,10 @@ class Transactions {
      * @param {*} date 
      * @param {*} value 
      */
-    addExpenseToExpenseGroupUsingExpDescriptionAndGroupRegexConfig(description, date, value) {
+    addExpenseToExpenseGroupUsingExpDescriptionAndGroupRegexConfig(category, description, date, value) {
 
         let expenseGroup = this.expensesGroup.find(_expenseGroup => {
-            return _expenseGroup.regex.find(rgx => {
-                return description.indexOf(rgx) >= 0
-            })
+            return _expenseGroup.name == category
         })
 
         if (expenseGroup == null) {
@@ -915,4 +913,4 @@ class Incoming {
     }
 }
 
-console.log(new Transactions().toJSON())
+console.log(new Transactions(_bankTransactions, _budget).toJSON())
