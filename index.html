@@ -139,15 +139,18 @@ limitations under the License.
      * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
      */
 
-    let _bankTransactions = { "data": [] }
-    let _budget = {
-      "data": [],
-      "incomings": []
-    }
+    let _bankTransactions;
+    let _budget;
 
     async function readSpreadsheet() {
 
       let _spreadsheetId = '1TEo8hAIiNJi_ZhYV70fC_xfYZDZIAzr30TNVS02Yxlg'
+      
+      _bankTransactions = { "data": [] }
+      _budget = {
+        "data": [],
+        "incomings": []
+      }
 
       try {
         let response = await gapi.client.sheets.spreadsheets.values.get({
