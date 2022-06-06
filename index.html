@@ -149,12 +149,6 @@ limitations under the License.
 
       let _spreadsheetId = '1TEo8hAIiNJi_ZhYV70fC_xfYZDZIAzr30TNVS02Yxlg'
 
-      _bankTransactions = { "data": [] }
-      _budget = {
-        "data": [],
-        "incomings": []
-      }
-
       try {
         let response = await gapi.client.sheets.spreadsheets.values.get({
           spreadsheetId: _spreadsheetId,
