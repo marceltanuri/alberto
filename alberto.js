@@ -1,17 +1,16 @@
 let _bankTransactions = { "data": [] }
-    let _budget = {
-      "data": [],
-      "incomings": []
-    }
+let _budget = {
+    "data": [],
+    "incomings": []
+}
 
 class Transactions {
     constructor(bankTransactions, budget) {
 
-
         var all_transactions = []
 
         // bank balance
-        this.balance = bankTransactions.data[0].Saldo
+        this.balance = 0
 
         all_transactions = bankTransactions.data
 
