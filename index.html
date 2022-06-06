@@ -202,10 +202,13 @@ limitations under the License.
               return elm.desc == element[0]
             })
 
-            category.fixed_expenses.push({
-              "name": element[1],
-              "value": element[2]
-            })
+            if (!category) {
+              category.fixed_expenses.push({
+                "name": element[1],
+                "value": element[2]
+              })
+            }
+
           }
         });
       } catch (err) {
