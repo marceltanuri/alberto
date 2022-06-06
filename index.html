@@ -155,17 +155,15 @@ limitations under the License.
           range: 'Lançamentos!A2:D250',
         });
         response.result.values.forEach(element => {
-          if (!element[0] && element.length >= 3) {
-            console.log(element)
-            _bankTransactions.data.push({
-              "Data lancamento": element[2],
-              "Data valor": element[2],
-              "Descricao": element[0] + element[3] ? " - " + element[3] : "",
-              "Montante": element[1],
-              "Categoria": element[0],
-              "Tipo": "Debito"
-            })
-          }
+          console.log(element)
+          _bankTransactions.data.push({
+            "Data lancamento": element[2],
+            "Data valor": element[2],
+            "Descricao": element[0] + (element[3] != undefined ? " - " + element[3] : ""),
+            "Montante": element[1],
+            "Categoria": element[0],
+            "Tipo": "Debito"
+          })
         });
       } catch (err) {
         console.log(err)
