@@ -181,7 +181,7 @@ limitations under the License.
           range: 'Configuração!A2:B50',
         });
         response.result.values.forEach(element => {
-          if (!element[0] && element.length >= 2) {
+          if (element[0] != undefined&& element.length >= 2) {
             _budget.data.push({
               "desc": element[0],
               "limit": element[1],
@@ -200,13 +200,13 @@ limitations under the License.
           range: 'Despesas Fixas!A2:D50',
         });
         response.result.values.forEach(element => {
-          if (!element[0] && element.length >= 3) {
+          if (element[0] != undefined && element.length >= 3) {
 
             let category = _budget.data.find(elm => {
               return elm.desc == element[0]
             })
 
-            if (!category) {
+            if (category != undefined) {
               category.fixed_expenses.push({
                 "name": element[1],
                 "value": element[2]
@@ -226,7 +226,7 @@ limitations under the License.
           range: 'Receitas!A2:B25',
         });
         response.result.values.forEach(element => {
-          if (!element[0] && element.length >= 2) {
+          if (element[0] != undefined && element.length >= 2) {
             _budget.data.push({
               "name": element[0],
               "value": element[1],
