@@ -159,7 +159,7 @@ limitations under the License.
             "Data lancamento": element[2],
             "Data valor": element[2],
             "Descricao": element[0] + (element[3] != undefined ? " - " + element[3] : ""),
-            "Montante": element[1] != undefined && element[1] != '' ? parseFloat(element[1].replace("R$", "")) : 0.0,
+            "Montante": element[1] != undefined && element[1] != '' ? parseFloatFromCurrency(element[1]) : 0.0,
             "Categoria": element[0],
             "Tipo": "Debito"
           })
@@ -178,7 +178,7 @@ limitations under the License.
           if (element[0] != undefined&& element.length >= 2) {
             _budget.data.push({
               "desc": element[0],
-              "limit": element[1] != undefined && element[1] != '' ? parseFloat(element[1].replace("R$", "")) : 0.0,
+              "limit": element[1] != undefined && element[1] != '' ? parseFloatFromCurrency(element[1]) : 0.0,
               "fixed_expenses": []
             })
           }
@@ -203,7 +203,7 @@ limitations under the License.
             if (category != undefined) {
               category.fixed_expenses.push({
                 "name": element[1],
-                "value": element[2] != undefined && element[2] != '' ? parseFloat(element[2].replace("R$", "")) : 0.0
+                "value": element[2] != undefined && element[2] != '' ? parseFloatFromCurrency(element[2]) : 0.0
               })
             }
 
@@ -223,7 +223,7 @@ limitations under the License.
           if (element[0] != undefined && element.length >= 2) {
             _budget.incomings.push({
               "name": element[0],
-              "value": element[1] != undefined && element[1] != '' ? parseFloat(element[1].replace("R$", "")) : 0.0,
+              "value": element[1] != undefined && element[1] != '' ? parseFloatFromCurrency(element[1]) : 0.0,
               "regex": ""
             })
           }
@@ -236,6 +236,11 @@ limitations under the License.
       let _json = await new Transactions(_bankTransactions, _budget).toJSON();
       await console.log(_json)
 
+    }
+
+    function parseFloatFromCurrency(currency){
+      var number = Number(currency.replace(/[^0-9\.-]+/g,""));
+      return parseFloat(number)
     }
   </script>
   <script src="alberto.js"></script>

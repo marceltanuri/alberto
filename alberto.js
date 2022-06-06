@@ -303,5 +303,3 @@ class Incoming {
         this.value = value
     }
 }
-
-console.log(new Transactions(_bankTransactions, _budget).toJSON())
