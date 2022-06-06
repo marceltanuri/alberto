@@ -155,10 +155,9 @@ limitations under the License.
           range: 'Lançamentos!A2:D250',
         });
         response.result.values.forEach(element => {
-          console.log(element)
           _bankTransactions.data.push({
             "Data lancamento": element[2],
-            "Data valor": element[2],
+            "Data valor": element[2] != undefined && element[2] != '' ? parseFloat(element[2].replace("R$", "")) : 0.0,
             "Descricao": element[0] + (element[3] != undefined ? " - " + element[3] : ""),
             "Montante": element[1],
             "Categoria": element[0],
