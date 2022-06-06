@@ -139,8 +139,11 @@ limitations under the License.
      * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
      */
 
-    let _bankTransactions;
-    let _budget;
+    let _bankTransactions = { "data": [] }
+    let _budget = {
+      "data": [],
+      "incomings": []
+    }
 
     async function readSpreadsheet() {
 
