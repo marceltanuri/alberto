@@ -145,7 +145,7 @@ limitations under the License.
     async function readSpreadsheet() {
 
       let _spreadsheetId = '1TEo8hAIiNJi_ZhYV70fC_xfYZDZIAzr30TNVS02Yxlg'
-      
+
       _bankTransactions = { "data": [] }
       _budget = {
         "data": [],
@@ -162,7 +162,7 @@ limitations under the License.
             _bankTransactions.data.push({
               "Data lancamento": element[2],
               "Data valor": element[2],
-              "Descricao": `${element[0]} - ${element[3]}`,
+              "Descricao": element[0] + element[3] ? " - " + element[3] : "",
               "Montante": element[1],
               "Categoria": element[0],
               "Tipo": "Debito"
