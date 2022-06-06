@@ -147,6 +147,12 @@ limitations under the License.
 
     async function readSpreadsheet() {
 
+      _bankTransactions = { "data": [] }
+      _budget = {
+        "data": [],
+        "incomings": []
+      }
+
       let _spreadsheetId = '1TEo8hAIiNJi_ZhYV70fC_xfYZDZIAzr30TNVS02Yxlg'
 
       try {
@@ -157,9 +163,9 @@ limitations under the License.
         response.result.values.forEach(element => {
           _bankTransactions.data.push({
             "Data lancamento": element[2],
-            "Data valor": element[2] != undefined && element[2] != '' ? parseFloat(element[2].replace("R$", "")) : 0.0,
+            "Data valor": element[2],
             "Descricao": element[0] + (element[3] != undefined ? " - " + element[3] : ""),
-            "Montante": element[1],
+            "Montante": element[1] != undefined && element[1] != '' ? parseFloat(element[1].replace("R$", "")) : 0.0,
             "Categoria": element[0],
             "Tipo": "Debito"
           })
