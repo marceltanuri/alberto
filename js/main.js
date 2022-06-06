@@ -9,6 +9,12 @@ function buildReport(json) {
 
     document.querySelector(".container-report").style.display = 'block'
 
+    document.querySelector(".report").innerHTML = ""
+    document.querySelector(".details").innerHTML = ""
+    document.querySelector(".totals").innerHTML = ""
+    document.querySelector(".incomings").innerHTML = ""
+    document.querySelector(".piechart").innerHTML = ""
+
     json.expensesGroup.forEach(expenseGroup => {
 
         // add category to chart
