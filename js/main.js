@@ -13,7 +13,7 @@ function buildReport(json) {
     document.querySelector(".details").innerHTML = ""
     document.querySelector(".totals").innerHTML = ""
     document.querySelector(".incomings").innerHTML = ""
-    document.querySelector(".piechart").innerHTML = ""
+    document.querySelector("#piechart").innerHTML = ""
 
     json.expensesGroup.forEach(expenseGroup => {
 
