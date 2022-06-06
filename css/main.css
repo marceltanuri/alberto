@@ -1,0 +1,68 @@
+body {
+    background-color: #141414;
+    color: #6495ed;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+.availableValue {
+    color: yellow;
+}
+
+.usedValue {
+    color: rgba(255, 0, 255, 0.733);
+}
+
+.availablePositive {
+    color: rgb(0, 173, 0);
+}
+
+.availableNegative {
+    color: rgb(213, 71, 71);
+}
+
+.details-button {
+    color: rgb(205, 205, 205);
+}
+
+
+.totalBalance {
+    color: rgb(0, 215, 215);
+}
+
+.pendingExpenses {
+    color: rgba(255, 57, 57, 0.869);
+}
+
+.totalAvailable {
+    color: rgb(0, 176, 0);
+}
+
+.totalCC {
+    color: rgba(255, 0, 255, 0.718);
+}
+
+.totalTicket {
+    color: yellow;
+}
+
+.expenseDesc {
+    color: #b4d2ff;
+}
+
+.incomingDesc {
+    color: #b4d2ff;
+}
+
+.container-report {
+    display: none;
+}
+
+  .paid-true:after {
+    content: '✓';
+    color: rgb(44, 168, 44);
+  }
+
+  #password{
+    height: 51px;
+  }
