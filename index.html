@@ -184,7 +184,7 @@ limitations under the License.
           if (element[0] != undefined&& element.length >= 2) {
             _budget.data.push({
               "desc": element[0],
-              "limit": element[1],
+              "limit": element[1] != undefined && element[1] != '' ? parseFloat(element[1].replace("R$", "")) : 0.0,
               "fixed_expenses": []
             })
           }
@@ -209,7 +209,7 @@ limitations under the License.
             if (category != undefined) {
               category.fixed_expenses.push({
                 "name": element[1],
-                "value": element[2]
+                "value": element[2] != undefined && element[2] != '' ? parseFloat(element[2].replace("R$", "")) : 0.0
               })
             }
 
@@ -229,7 +229,7 @@ limitations under the License.
           if (element[0] != undefined && element.length >= 2) {
             _budget.incomings.push({
               "name": element[0],
-              "value": element[1],
+              "value": element[1] != undefined && element[1] != '' ? parseFloat(element[1].replace("R$", "")) : 0.0,
               "regex": ""
             })
           }
