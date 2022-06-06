@@ -154,7 +154,7 @@ limitations under the License.
           spreadsheetId: _spreadsheetId,
           range: 'Lançamentos!A2:D250',
         });
-        response.result.values.array.forEach(element => {
+        response.result.values.forEach(element => {
           if (!element[0] && element.length >= 3) {
             _bankTransactions.data.push({
               "Data lancamento": element[2],
@@ -176,7 +176,7 @@ limitations under the License.
           spreadsheetId: _spreadsheetId,
           range: 'Configuração!A2:B50',
         });
-        response.result.values.array.forEach(element => {
+        response.result.values.forEach(element => {
           if (!element[0] && element.length >= 2) {
             _budget.data.push({
               "desc": element[0],
@@ -195,7 +195,7 @@ limitations under the License.
           spreadsheetId: _spreadsheetId,
           range: 'Despesas Fixas!A2:D50',
         });
-        response.result.values.array.forEach(element => {
+        response.result.values.forEach(element => {
           if (!element[0] && element.length >= 3) {
 
             let category = _budget.data.find(elm => {
@@ -218,7 +218,7 @@ limitations under the License.
           spreadsheetId: _spreadsheetId,
           range: 'Receitas!A2:B25',
         });
-        response.result.values.array.forEach(element => {
+        response.result.values.forEach(element => {
           if (!element[0] && element.length >= 2) {
             _budget.data.push({
               "name": element[0],
