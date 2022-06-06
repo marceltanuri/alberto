@@ -72,8 +72,7 @@ function buildReport(json) {
     // Totals
     let _totalsDiv = document.querySelector(".totals")
     breakLines(_totalsDiv)
-    let _innerHTML = `Saldo Total: <span class="totalBalance">${json.totals.balance}</span>`
-    _innerHTML += "<br/>"
+    let _innerHTML = "<br/>"
     _innerHTML += `Despesas restantes: <span class="pendingExpenses">${json.totals.pendingExpenses}</span>`
     _innerHTML += "<br/>"
     _innerHTML += `<b>Total disponível: <span class="totalAvailable">${json.totals.available}</span></b>`
@@ -85,8 +84,6 @@ function buildReport(json) {
     _innerHTML += `Despesa em curso: ${json.totals.realExpenses}`
     _innerHTML += "<hr/>"
     _innerHTML += `Saldo CC: <span class="totalCC">${json.totals.cc}</span>`
-    _innerHTML += "<br/>"
-    _innerHTML += `Saldo Ticket: <span class="totalTicket">${json.totals.ticket}</span>`
     _innerHTML += "<br/>"
 
     _totalsDiv.innerHTML = _innerHTML
