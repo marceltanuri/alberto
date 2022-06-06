@@ -155,8 +155,8 @@ limitations under the License.
           range: 'Lançamentos!A2:D250',
         });
         response.result.values.forEach(element => {
-          console.log(element)
           if (!element[0] && element.length >= 3) {
+            console.log(element)
             _bankTransactions.data.push({
               "Data lancamento": element[2],
               "Data valor": element[2],
