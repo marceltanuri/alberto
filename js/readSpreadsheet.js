@@ -61,10 +61,9 @@ function handleAuthClick() {
         if (resp.error !== undefined) {
             throw (resp);
         }
-        document.getElementById('password').style.visibility = 'hidden';
         document.getElementById('signout_button').style.visibility = 'visible';
         document.getElementById('refresh_button').style.visibility = 'visible';
-        document.getElementById('authorize_button').style.visibility = 'hidden';
+        document.querySelector('.login').style.display = 'none';
         await readSpreadsheet();
     };
 
@@ -89,8 +88,7 @@ function handleSignoutClick() {
         document.querySelector(".container-report").style.display = 'none'
         document.getElementById('signout_button').style.visibility = 'hidden';
         document.getElementById('refresh_button').style.visibility = 'hidden';
-        document.getElementById('password').style.visibility = 'visible';
-        document.getElementById('authorize_button').style.visibility = 'visible';
+        document.querySelector('.login').style.display = 'block';
     }
 }
 
