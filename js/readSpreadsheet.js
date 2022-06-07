@@ -202,7 +202,7 @@ async function readSpreadsheet() {
     }
 
     let _json = new Transactions(_bankTransactions, _budget).toJSON();
-    console.log(_json)
+    chartData = []
     buildReport(_json)
 
 }
