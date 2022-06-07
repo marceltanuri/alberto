@@ -64,6 +64,7 @@ function handleAuthClick() {
         document.getElementById('password').style.display = 'none';
         document.getElementById('signout_button').style.visibility = 'visible';
         document.getElementById('refresh_button').style.visibility = 'visible';
+        document.getElementById('authorize_button').style.visibility = 'hidden';
         await readSpreadsheet();
     };
 
