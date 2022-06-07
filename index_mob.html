@@ -29,13 +29,28 @@
 
 	<script src="https://kit.fontawesome.com/ea4954f633.js" crossorigin="anonymous"></script>
 
-	<h2 class="text-center" style="margin-top: 25px; margin-bottom: 25px;">Alberto Budget Report</h2>
-	<div class="text-center">
-		<button id="authorize_button" class="btn btn-info" style="margin-right: 18px;"
-			onclick="handleAuthClick()">Authorize</button>
-		<button id="signout_button" class="btn btn-warning" onclick="handleSignoutClick()">Sign Out</button>
+	<h2>Alberto Budget Report</h2>
+	<div class="row">
+	  <div style="margin-top: 25px; float: right; margin-right: 20px;">
+		<button id="refresh_button" class="btn btn-info" style="margin-right: 18px; visibility: hidden;"
+		  onclick="handleAuthClick()">Refresh</button>
+		<button id="signout_button" class="btn btn-warning" style="visibility: hidden;"
+		  onclick="handleSignoutClick()">Sign Out</button>
+	  </div>
 	</div>
 	<hr />
+  
+	<div class="row align-items-start" style="margin-bottom: 30px;">
+	  <div class="col-12">
+		<div class="loading text-center">
+		  <input type="password" id="password" placeholder="cód planilha" />
+		  <div class="text-center" style="margin-top: 25px">
+			<button id="authorize_button" class="btn btn-info" style="margin-right: 18px;"
+			  onclick="handleAuthClick()">Authorize</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
 
 	<div class="container container-report card">
 
