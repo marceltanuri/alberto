@@ -25,20 +25,24 @@
   <script src="https://kit.fontawesome.com/ea4954f633.js" crossorigin="anonymous"></script>
 
   <h2 class="text-center">Alberto Budget Report</h2>
+  <div style="margin-top: 25px; float: right;">
+    <button id="refresh_button" class="btn btn-info" style="margin-right: 18px; visibility: hidden;"
+      onclick="handleAuthClick()">Refresh</button>
+    <button id="signout_button" class="btn btn-warning" style="visibility: hidden;" onclick="handleSignoutClick()">Sign Out</button>
+  </div>
   <hr />
 
-    <div class="row align-items-start" style="margin-bottom: 30px;">
-      <div class="col-12">
-        <div class="loading text-center">
-          <input type="password" id="password" placeholder="cód planilha" />
-          <div class="text-center" style="margin-top: 25px;">
-            <button id="authorize_button" class="btn btn-info" style="margin-right: 18px;"
-              onclick="handleAuthClick()">Authorize</button>
-            <button id="signout_button" class="btn btn-warning" onclick="handleSignoutClick()">Sign Out</button>
-          </div>
+  <div class="row align-items-start" style="margin-bottom: 30px;">
+    <div class="col-12">
+      <div class="loading text-center">
+        <input type="password" id="password" placeholder="cód planilha" />
+        <div class="text-center" style="margin-top: 25px">
+          <button id="authorize_button" class="btn btn-info" style="margin-right: 18px;"
+            onclick="handleAuthClick()">Authorize</button>
         </div>
       </div>
     </div>
+  </div>
 
   <div class="container container-report">
     <div class="row align-items-start">
