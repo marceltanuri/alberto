@@ -3,9 +3,11 @@ var formatter = new Intl.NumberFormat('pt-PT', {
     currency: 'EUR',
 });
 
-let chartData = [['Category', 'Total']]
+let chartData;
 
 function buildReport(json) {
+
+    chartData = [['Category', 'Total']]
 
     document.querySelector(".container-report").style.display = 'block'
 
