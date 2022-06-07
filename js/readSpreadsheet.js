@@ -157,7 +157,7 @@
     try {
       let response = await gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: _spreadsheetId,
-        range: 'Despesas Fixas!A2:D50',
+        range: 'Despesas Fixas!A2:E50',
       });
       response.result.values.forEach(element => {
         if (element[0] != undefined && element.length >= 3) {
@@ -169,7 +169,8 @@
           if (category != undefined) {
             category.fixed_expenses.push({
               "name": element[1],
-              "value": element[2] != undefined && element[2] != '' ? parseFloatFromCurrency(element[2]) : 0.0
+              "value": element[2] != undefined && element[2] != '' ? parseFloatFromCurrency(element[2]) : 0.0,
+              "paid": element[3] === "TRUE"
             })
           }
 

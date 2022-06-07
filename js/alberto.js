@@ -172,7 +172,7 @@ class Transactions {
             _expenseGroup.expenseSumPercentage = expenseGroup.getExpenseSumPercentage()
             _expenseGroup.availableValuePercentage = expenseGroup.getAvailableValuePercentage()
             _expenseGroup.expenses = expenseGroup.getExpenses()
-            _expenseGroup.fixedExpenses = expenseGroup.getFixedExpenses()
+            _expenseGroup.fixedExpenses = expenseGroup.fixedExpenses
             json.expensesGroup.push(_expenseGroup)
         })
 
