@@ -1,4 +1,4 @@
-const _spreadsheetId = ''
+let _spreadsheetId = ''
 
 var formatter = new Intl.NumberFormat('pt-PT', {
     style: 'currency',
