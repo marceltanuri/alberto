@@ -19,6 +19,7 @@ function buildReport(json) {
 
         // add category to chart
         chartData.push([expenseGroup.name, expenseGroup.limit + (expenseGroup.availableValue >= 0 ? 0 : (expenseGroup.availableValue * -1))])
+        console.log([expenseGroup.name, expenseGroup.limit + (expenseGroup.availableValue >= 0 ? 0 : (expenseGroup.availableValue * -1))])
 
         // Sumary
         let expenseGroupDiv = document.createElement("div")
@@ -95,6 +96,7 @@ function buildReport(json) {
     _totalsDiv.innerHTML = _innerHTML
 
     chartData.push(['Saldo', parseFloat(json.totals.available.replace('€', '').replace(',', '.'))])
+    console.log(['Saldo', parseFloat(json.totals.available.replace('€', '').replace(',', '.'))])
 
     let _innerHTMLIncomings = ""
     json.incomings.data.forEach(incoming => {

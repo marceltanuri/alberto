@@ -199,8 +199,8 @@
       document.getElementById('content').innerText = err.message;
     }
 
-    let _json = await new Transactions(_bankTransactions, _budget).toJSON();
-    await console.log(_json)
+    let _json = new Transactions(_bankTransactions, _budget).toJSON();
+    console.log(_json)
     buildReport(_json)
 
   }
