@@ -88,6 +88,7 @@ function handleSignoutClick() {
         gapi.client.setToken('');
         document.querySelector(".container-report").style.display = 'none'
         document.getElementById('signout_button').style.visibility = 'hidden';
+        document.getElementById('refresh_button').style.visibility = 'hidden';
         document.getElementById('password').style.display = 'block';
         document.getElementById('authorize_button').style.visibility = 'visible';
     }
