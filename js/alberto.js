@@ -159,7 +159,7 @@ class Transactions {
     toJSON() {
         var formatter = new Intl.NumberFormat('pt-PT', {
             style: 'currency',
-            currency: 'EUR',
+            currency: 'BRL',
         });
 
         let json = {}

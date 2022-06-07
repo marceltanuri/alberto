@@ -1,6 +1,6 @@
 var formatter = new Intl.NumberFormat('pt-PT', {
     style: 'currency',
-    currency: 'EUR',
+    currency: 'BRL',
 });
 
 let chartData;
@@ -91,14 +91,12 @@ function buildReport(json) {
     _innerHTML += `Despesa prevista: ${json.totals.previewedExpenses}`
     _innerHTML += "<br/>"
     _innerHTML += `Despesa em curso: ${json.totals.realExpenses}`
-    _innerHTML += "<hr/>"
-    _innerHTML += `Saldo CC: <span class="totalCC">${json.totals.cc}</span>`
     _innerHTML += "<br/>"
 
     _totalsDiv.innerHTML = _innerHTML
 
-    chartData.push(['Saldo', parseFloat(json.totals.available.replace('€', '').replace(',', '.'))])
-    console.log(['Saldo', parseFloat(json.totals.available.replace('€', '').replace(',', '.'))])
+    chartData.push(['Saldo', parseFloat(json.totals.available.replace('R$', '').replace(',', '.'))])
+    console.log(['Saldo', parseFloat(json.totals.available.replace('R$', '').replace(',', '.'))])
 
     let _innerHTMLIncomings = ""
     json.incomings.data.forEach(incoming => {
