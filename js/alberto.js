@@ -207,7 +207,7 @@ class ExpenseGroup {
         this.regex = cat.regex
         if (cat.limit != undefined)
             this.limit = cat.limit
-        if (cat.fixed_expenses != undefined) {
+        if (cat.fixed_expenses != undefined && cat.fixed_expenses.length > 0) {
             this.fixedExpenses = cat.fixed_expenses
             let limit = 0
             cat.fixed_expenses.forEach(exp => {
