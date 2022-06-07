@@ -84,7 +84,7 @@ function handleSignoutClick() {
     if (token !== null) {
         google.accounts.oauth2.revoke(token.access_token);
         gapi.client.setToken('');
-        document.getElementById('content').innerText = '';
+        document.querySelector(".container-report").style.display = 'none'
         document.getElementById('authorize_button').innerText = 'Authorize';
         document.getElementById('password').style.visibility = 'visible';
         document.getElementById('signout_button').style.visibility = 'hidden';
