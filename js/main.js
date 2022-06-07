@@ -1,3 +1,5 @@
+const _spreadsheetId = ''
+
 var formatter = new Intl.NumberFormat('pt-PT', {
     style: 'currency',
     currency: 'BRL',
@@ -159,8 +161,6 @@ function drawChart() {
     chart.draw(data, options);
 }
 
-
-const _spreadsheetId = ''
 
 ['input'].forEach(evt => {
     document.querySelector("#password").addEventListener(evt, function () {
