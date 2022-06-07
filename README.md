@@ -17,5 +17,9 @@ O Alberto é uma aplicação de código "alberto" que integra com API Google par
 Observações:
 - O código da planilha não concede acesso direto aos dados da planilha. As permissões de acesso da planilha são definidas pelo google drive e respeitadas pelo sistema, ou seja, somente o administrador da planilha ou pessoas com quem ele tenha compartilhado a planilha é que terão acesso aos dados
 
+<hr/>
+
 ## Visão geral de arquitetura
+
+<img src="doc/Alberto.png"/>
 
