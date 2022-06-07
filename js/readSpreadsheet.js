@@ -126,7 +126,7 @@ async function readSpreadsheet() {
                     "Data lancamento": element[2],
                     "Data valor": element[2],
                     "Descricao": element[0] + (element[3] != undefined ? " - " + element[3] : ""),
-                    "Montante": element[1] != undefined && element[1] != '' ? parseFloatFromCurrency(element[1]) : 0.0,
+                    "Montante": element[1] != undefined && element[1] != '' ? parseFloatFromCurrency(element[1])*-1 : 0.0,
                     "Categoria": element[0],
                     "Tipo": "Debito"
                 })
