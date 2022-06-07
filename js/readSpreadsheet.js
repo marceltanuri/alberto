@@ -7,8 +7,8 @@ let tokenClient;
 let gapiInited = false;
 let gisInited = false;
 
-document.getElementById('authorize_button').style.visibility = 'hidden';
-document.getElementById('signout_button').style.visibility = 'hidden';
+document.getElementById('authorize_button').style.display = 'none';
+document.getElementById('signout_button').style.display = 'none';
 
 /**
  * Callback after api.js is loaded.
@@ -48,7 +48,7 @@ function gisLoaded() {
  */
 function maybeEnableButtons() {
     if (gapiInited && gisInited) {
-        document.getElementById('authorize_button').style.visibility = 'visible';
+        document.getElementById('authorize_button').style.display = 'block';
     }
 }
 
@@ -60,7 +60,7 @@ function handleAuthClick() {
         if (resp.error !== undefined) {
             throw (resp);
         }
-        document.getElementById('signout_button').style.visibility = 'visible';
+        document.getElementById('signout_button').style.display = 'block';
         document.getElementById('authorize_button').innerText = 'Refresh';
         await readSpreadsheet();
     };
