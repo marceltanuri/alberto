@@ -1,5 +1,3 @@
-const _spreadsheetId = '1C04zbcV1UlxmS5G-1QWUT9OslSbJWhhCz7gwOZzvMQU'
-
 // TODO(developer): Set to client ID and API key from the Developer Console
 const CLIENT_ID = '1058634479009-tenrbcqlhuae3hqnrgnlp11tjotap5ao.apps.googleusercontent.com';
 const API_KEY = 'AIzaSyAQtFCqLuNKPSA5_8lHYakulT_qMDn6Mfw';
