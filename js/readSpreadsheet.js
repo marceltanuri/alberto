@@ -9,6 +9,7 @@ let gisInited = false;
 
 document.getElementById('authorize_button').style.visibility = 'hidden';
 document.getElementById('signout_button').style.visibility = 'hidden';
+document.getElementById('refresh_button').style.visibility = 'hidden';
 
 /**
  * Callback after api.js is loaded.
@@ -62,7 +63,7 @@ function handleAuthClick() {
         }
         document.getElementById('password').style.display = 'none';
         document.getElementById('signout_button').style.visibility = 'visible';
-        document.getElementById('authorize_button').innerText = 'Refresh';
+        document.getElementById('refresh_button').style.visibility = 'visible';
         await readSpreadsheet();
     };
 
@@ -85,9 +86,9 @@ function handleSignoutClick() {
         google.accounts.oauth2.revoke(token.access_token);
         gapi.client.setToken('');
         document.querySelector(".container-report").style.display = 'none'
-        document.getElementById('authorize_button').innerText = 'Authorize';
-        document.getElementById('password').style.display = 'block';
         document.getElementById('signout_button').style.visibility = 'hidden';
+        document.getElementById('password').style.display = 'block';
+        document.getElementById('authorize_button').style.visibility = 'visible';
     }
 }
 
