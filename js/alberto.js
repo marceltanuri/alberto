@@ -110,7 +110,7 @@ class Transactions {
         this.expensesGroup.forEach(elm => {
             sum = sum + elm.getExpensesSum()
         })
-        
+
         return sum;
     }
 
@@ -267,7 +267,7 @@ class ExpenseGroup {
     getExpensesSum() {
         let sum = 0.0
         this.expenses.forEach(elm => { sum = sum + parseFloat(elm.value) })
-        this.fixedExpenses.forEach(elm => { sum = sum + parseFloat(elm.value) })
+        this.fixedExpenses.forEach(elm => { if (elm.paid) sum = sum + parseFloat(elm.value) })
         return sum
     }
 
