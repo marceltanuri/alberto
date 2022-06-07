@@ -60,7 +60,7 @@ function handleAuthClick() {
         if (resp.error !== undefined) {
             throw (resp);
         }
-        document.getElementById('password').style.visibility = 'hidden';
+        document.getElementById('password').style.display = 'none';
         document.getElementById('signout_button').style.visibility = 'visible';
         document.getElementById('authorize_button').innerText = 'Refresh';
         await readSpreadsheet();
@@ -86,7 +86,7 @@ function handleSignoutClick() {
         gapi.client.setToken('');
         document.querySelector(".container-report").style.display = 'none'
         document.getElementById('authorize_button').innerText = 'Authorize';
-        document.getElementById('password').style.visibility = 'visible';
+        document.getElementById('password').style.display = 'block';
         document.getElementById('signout_button').style.visibility = 'hidden';
     }
 }
