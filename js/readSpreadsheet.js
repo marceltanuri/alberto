@@ -61,7 +61,7 @@ function handleAuthClick() {
         if (resp.error !== undefined) {
             throw (resp);
         }
-        document.getElementById('password').style.display = 'none';
+        document.getElementById('password').style.visibility = 'hidden';
         document.getElementById('signout_button').style.visibility = 'visible';
         document.getElementById('refresh_button').style.visibility = 'visible';
         document.getElementById('authorize_button').style.visibility = 'hidden';
@@ -89,7 +89,7 @@ function handleSignoutClick() {
         document.querySelector(".container-report").style.display = 'none'
         document.getElementById('signout_button').style.visibility = 'hidden';
         document.getElementById('refresh_button').style.visibility = 'hidden';
-        document.getElementById('password').style.display = 'block';
+        document.getElementById('password').style.visibility = 'visible';
         document.getElementById('authorize_button').style.visibility = 'visible';
     }
 }
