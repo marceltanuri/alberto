@@ -1,13 +1,8 @@
 let _spreadsheetId = ''
 
-var formatter = new Intl.NumberFormat('pt-PT', {
-    style: 'currency',
-    currency: 'BRL',
-});
-
 let chartData;
 
-function buildReport(json) {
+function buildReport(json, formatter) {
 
     chartData = [['Category', 'Total']]
 

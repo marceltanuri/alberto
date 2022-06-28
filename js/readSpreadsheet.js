@@ -105,6 +105,8 @@ async function readSpreadsheet() {
         "incomings": []
     }
 
+    let formatter = ""
+
     try {
         let response = await gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: _spreadsheetId,
@@ -207,9 +209,8 @@ async function readSpreadsheet() {
         document.getElementById('content').innerText = err.message;
     }
 
-    let _json = new Transactions(_bankTransactions, _budget).toJSON();
-    chartData = []
-    buildReport(_json)
+    let _json = new Transactions(_bankTransactions, _budget, formatter).toJSON();
+    buildReport(_json, formatter)
 
 }
 

@@ -5,7 +5,7 @@ let _budget = {
 }
 
 class Transactions {
-    constructor(bankTransactions, budget) {
+    constructor(bankTransactions, budget, formatter) {
 
         var all_transactions = []
 
@@ -157,11 +157,6 @@ class Transactions {
     }
 
     toJSON() {
-        var formatter = new Intl.NumberFormat('pt-PT', {
-            style: 'currency',
-            currency: 'BRL',
-        });
-
         let json = {}
 
         json.expensesGroup = []
