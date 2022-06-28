@@ -7,6 +7,8 @@ let _budget = {
 class Transactions {
     constructor(bankTransactions, budget, formatter) {
 
+        this.formatter = formatter
+        
         var all_transactions = []
 
         // bank balance
