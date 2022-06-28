@@ -105,6 +105,24 @@ async function readSpreadsheet() {
         "incomings": []
     }
 
+    formatter
+
+    try {
+        let response = await gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: _spreadsheetId,
+            range: 'Configuration!B1:B2',
+        });
+        if (response.result.values != undefined){
+            formatter = new Intl.NumberFormat(response.result.values[0][0], {
+                style: 'currency',
+                currency: response.result.values[1][0],
+            });
+        }
+    }catch (err) {
+        console.log(err)
+        document.getElementById('content').innerText = err.message;
+    }
+
     try {
         let response = await gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: _spreadsheetId,
