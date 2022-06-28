@@ -108,7 +108,7 @@ async function readSpreadsheet() {
     try {
         let response = await gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: _spreadsheetId,
-            range: 'Lançamentos!A2:D250',
+            range: 'Expenses!A2:D250',
         });
         if (response.result.values != undefined)
             response.result.values.forEach(element => {
@@ -129,7 +129,7 @@ async function readSpreadsheet() {
     try {
         let response = await gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: _spreadsheetId,
-            range: 'Configuração!A2:B50',
+            range: 'Categories!A2:B50',
         });
         response.result.values.forEach(element => {
             if (element[0] != undefined && element.length >= 2) {
@@ -148,7 +148,7 @@ async function readSpreadsheet() {
     try {
         let response = await gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: _spreadsheetId,
-            range: 'Despesas Fixas!A2:E50',
+            range: 'Repeatable Expenses!A2:E50',
         });
         response.result.values.forEach(element => {
             if (element[0] != undefined && element.length >= 3) {
@@ -161,7 +161,7 @@ async function readSpreadsheet() {
                     category.fixed_expenses.push({
                         "name": element[1],
                         "value": element[2] != undefined && element[2] != '' ? parseFloatFromCurrency(element[2]) : 0.0,
-                        "paid": element[3] === "TRUE"
+                        "paid": element[3] === "TRUE" // TODO validate if it's paid
                     })
                 }
 
@@ -175,7 +175,7 @@ async function readSpreadsheet() {
     try {
         let response = await gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: _spreadsheetId,
-            range: 'Receitas!A2:B25',
+            range: 'Incomings!A2:B25',
         });
         response.result.values.forEach(element => {
             if (element[0] != undefined && element.length >= 2) {
