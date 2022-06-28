@@ -176,23 +176,23 @@ class Transactions {
 
         json.totals = {}
 
-        json.totals.balance = formatter.format(this.getTotalBalance())
-        json.totals.pendingExpenses = formatter.format(this.getGroupAvailableValueSum())
-        json.totals.available = formatter.format(this.getIncomingsSum() - (this.getGroupAvailableValueSum() - this.getGroupExpensesSum()))
-        json.totals.gross = formatter.format(this.getGroupExpensesSum())
-        json.totals.previewedExpenses = formatter.format(this.getLimitSum())
-        json.totals.realExpenses = formatter.format(this.getGroupAvailableValueSum() - this.getGroupExpensesSum())
+        json.totals.balance = this.formatter.format(this.getTotalBalance())
+        json.totals.pendingExpenses = this.formatter.format(this.getGroupAvailableValueSum())
+        json.totals.available = this.formatter.format(this.getIncomingsSum() - (this.getGroupAvailableValueSum() - this.getGroupExpensesSum()))
+        json.totals.gross = this.formatter.format(this.getGroupExpensesSum())
+        json.totals.previewedExpenses = this.formatter.format(this.getLimitSum())
+        json.totals.realExpenses = this.formatter.format(this.getGroupAvailableValueSum() - this.getGroupExpensesSum())
 
-        json.totals.cc = formatter.format(this.balance)
+        json.totals.cc = this.formatter.format(this.balance)
 
         if (this.ticketBalance != "") {
-            json.totals.ticket = formatter.format(this.ticketBalance)
+            json.totals.ticket = this.formatter.format(this.ticketBalance)
         }
 
         json.incomings = {}
         json.estimatedIncomings = this.getEstimatedIncomings()
         json.incomings.data = this.getIncomings()
-        json.incomings.sum = formatter.format(this.getIncomingsSum())
+        json.incomings.sum = this.formatter.format(this.getIncomingsSum())
 
         return json
     }
