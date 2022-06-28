@@ -105,8 +105,6 @@ async function readSpreadsheet() {
         "incomings": []
     }
 
-    formatter
-
     try {
         let response = await gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: _spreadsheetId,
